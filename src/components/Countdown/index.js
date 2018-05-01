@@ -19,7 +19,7 @@ class Countdown extends Component {
 
   // you can simplyfy like this as well
   state = {
-    //re-factoring
+    //re-factor
     // duration: this.getRemainingTime(),
     currentDate: moment(),
     nextDate: moment({ year: moment().year() + 1 }),
@@ -132,7 +132,7 @@ class Countdown extends Component {
               <Datepicker onDateReset={this.handleDateReset} />
               <Controls paused={paused} onPausedToggle={this.handlePausedToggle} />
               <HolidayModal
-                holidays={this.getHolidays()}
+                holidays={holidays }
                 active={showHolidays}
                 onToggle={this.HandleHolidaysToggle}/>
               </div>
