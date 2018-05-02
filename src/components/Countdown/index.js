@@ -64,16 +64,19 @@ class Countdown extends Component {
 
     // paused => clear up the interval, else set new interval
     // better way writing with prevState
-    this.setState((prevState, props) => {
-      const paused = !prevState.paused;
+    this.setState(({paused}, props) => {
+      paused = !paused;
       if (paused) {
         this.pause();
       } else {
         this.resume();
       }
-      return {
-        paused,
-      };
+      const nextState = {
+        paused
+      }
+      !paused && (nextState.currentDate = moment())
+
+      return nextState;
     });
   }
 
@@ -110,7 +113,7 @@ class Countdown extends Component {
   }
 
   render() {
-    const { paused, nextDate, showHolidays } = this.state,
+    const { paused, nextDate, showHolidays, currentDate } = this.state,
       duration = this.getRemainingTime(),
       holidays = this.getHolidays()
 
@@ -124,15 +127,18 @@ class Countdown extends Component {
           <button
             onClick={this.HandleHolidaysToggle}
             style={{margin: '5 0 0 10'}}
-            className='button is-small is-rounded is-light'>Holidays</button>
+            className='button is-small is-rounded is-light is-outlined'>Holidays</button>
             </h1>
             <section className="section">
             <Timer duration={duration}/>
             </section>
               <Datepicker onDateReset={this.handleDateReset} />
               <Controls paused={paused} onPausedToggle={this.handlePausedToggle} />
+              <section>
+                <i>{currentDate.format('LLLL')}</i>
+              </section>
               <HolidayModal
-                holidays={holidays }
+                holidays={holidays}
                 active={showHolidays}
                 onToggle={this.HandleHolidaysToggle}/>
               </div>

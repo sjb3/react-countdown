@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default ({ active, onToggle, holidays }) => (
+
   <div className={`modal${active ? ' is-active' : ''}`}>
     <div className="modal-background" onClick={onToggle} />
     <div className="modal-card">

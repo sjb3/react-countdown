@@ -1,8 +1,23 @@
 import React from 'react';
 
+const Control = ({
+  disabled, onClick, color, children,
+}) => (
+  <p className="control">
+    <button
+      className={`button is-outlined is-medium is-${color}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  </p>
+);
+
+// more modularization!
 export default ({ paused, onPausedToggle }) => (
   <div className="field is-grouped is-grouped-centered">
-    <p className="control">
+    {/* <p className="control">
       <button
         className="button is-danger is-outlined is-medium"
         disabled={paused}
@@ -19,7 +34,8 @@ export default ({ paused, onPausedToggle }) => (
       >
       Resume
       </button>
-    </p>
-
+    </p> */}
+    <Control disabled={paused} color="danger" onClick={onPausedToggle}>Pause</Control>
+    <Control disabled={!paused} color="success" onClick={onPausedToggle}>Resume</Control>
   </div>
 );
